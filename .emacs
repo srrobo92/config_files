@@ -16,7 +16,9 @@ There are two things you can do about this warning:
     ;; For important compatibility libraries like cl-lib
     (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
-
+(with-eval-after-load "company"
+  (define-key company-active-map (kbd "C-p") #'company-select-previous-or-abort)
+  (define-key company-active-map (kbd "C-n") #'company-select-next-or-abort))
 (defadvice load-theme (before clear-previous-themes activate)
   "Clear existing theme settings instead of layering them"
   (mapc #'disable-theme custom-enabled-themes))
